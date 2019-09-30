@@ -2,6 +2,7 @@ var A = document.getElementById('Calculator');
 A.setAttribute('class', 'container text-center');
 var keys = ['C', '', '', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '0', '', '.', '='];
 var input = [];
+
 // var defaultClear needs to clear after = is hit and another number  if operator has not been hit before a number
 
 var title = document.createElement('div');
@@ -39,7 +40,7 @@ function createCalc() {
 
         if (keys[c]) {
             newCol.addEventListener("click", function () {
-                console.log(input);
+                // console.log(input);
 
                 switch (this.innerHTML) {
                     case '+':
@@ -67,9 +68,11 @@ function createCalc() {
                             displayCharacters(total);
                             input = [total.toString()];
                         }
-                        break
+                        // if a number is entered after = is hit then clear total 
+                        break;
 
                     case '.':
+                        decimal();
                         numbers(this.innerHTML);
                         break;
                     case 'C':
@@ -94,7 +97,7 @@ function createCalc() {
 
 // Display Key Characters
 function displayCharacters(displayCharacter) {
-    console.log('displayCharacter:', displayCharacter);
+    // console.log('displayCharacter:', displayCharacter);
 
     var displayCalc = document.getElementById('output');
 
@@ -103,55 +106,76 @@ function displayCharacters(displayCharacter) {
 
 function numbers(n) {
     var length = input.length;
-// Check string length for x digits
+    // Check string length for x digits
 
     if (length > 0) {
-        if (parseInt(input[length - 1], 10) >= 0) {
+        // we have a number that needs to be added
+        if (parseInt(input[length - 1], 10) >= 0) {  // 0. == 0
             // console.log('length', length, 'input', input)
-            input[length - 1] = input[length - 1] + n;
-            // console.log(length,  input)
+            if (n != ".") {
+                input[length - 1] = input[length - 1] + n;
+            }
+
+            console.log(length, input)
         }
 
         else {
+            // we need to add an operator or a decimal
+            console.log(input);
             input.push(n);
+
         }
     }
     else {
         input.push(n);
     }
     displayCharacters(input[input.length - 1]);
-    
-
 }
 
 
 function operators(o) {
-   var length = input.length;
+    var length = input.length;
+    // console.log(input)
     if (length > 0) {
-        
-        if (['+', '-', '*', '/'].includes(input[length - 1])) {
-            input[length - 1] = o;
-        }
-        else {
-            input.push(o);
-        }
+        input[1] = o;
+        // if (['+', '-', '*', '/'].includes(input[1])) {
+        //     console.log('this work?')
+        //     input[] = o;
+        // }
+        // else {
+        //     console.log('this work as well?')
+        // }
+    }
+    // else {
+    //     input.push(o);
+    // }
+    // displayCharacters(input[input.length - 1]);
+}
+
+
+
+
+function decimal() {
+    console.log('decimal function,', input)
+    if (input.length == 0) {
+        input[0] = "0.";
+    }
+    else if (input.length == 2) {
+        input[2] = "0.";
     }
     else {
-        input.push(o);
+        if (input.indexOf(".") == -1) {
+            input[input.length - 1] = input[input.length - 1] + ".";
+        }
     }
-    displayCharacters(input[input.length - 1]);
-}
+    return input;
+};
+
+
+
 
 
 function init() {
     A.innerHTML = "";
     createCalc();
-
-
-
-
-
-
-
-
 }
