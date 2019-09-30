@@ -2,6 +2,7 @@ var A = document.getElementById('Calculator');
 A.setAttribute('class', 'container text-center');
 var keys = ['C', '', '', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '0', '', '.', '='];
 var input = [];
+// var defaultClear needs to clear after = is hit and another number  if operator has not been hit before a number
 
 var title = document.createElement('div');
 title.innerHTML = 'DO YOU MATH?';
@@ -102,6 +103,7 @@ function displayCharacters(displayCharacter) {
 
 function numbers(n) {
     var length = input.length;
+// Check string length for x digits
 
     if (length > 0) {
         if (parseInt(input[length - 1], 10) >= 0) {
