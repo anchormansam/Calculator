@@ -9,6 +9,7 @@ var total = 0;
 // var defaultClear needs to clear after = is hit and another number  if operator has not been hit before a number
 
 var title = document.createElement('div');
+title.setAttribute('class', 'text-warning h2')
 title.innerHTML = 'DO YOU MATH?';
 
 function calculate() {
@@ -19,13 +20,13 @@ function calculate() {
         case '/':
         case '*':
             if(equalPressed){
-                // console.log('in equals pressed == false',this.innerHTML);
                 input = [];
-                // displayCharacters(0);
+                displayCharacters(0);
             }
+            if  (!equalPressed){
                 // numbers(this.innerHTML);
                 operators(this.innerHTML);
-            
+            }
             break;
         case '=':
             equalPressed = true;
@@ -81,7 +82,7 @@ function createCalc() {
     calculator.id = 'display';
 
     var display = document.createElement('div');
-    display.setAttribute('class', 'text-right');
+    display.setAttribute('class', 'text-right text-warning display-2');
     display.setAttribute('id', 'output');
     display.innerHTML = "0";
 
@@ -94,7 +95,7 @@ function createCalc() {
 
     for (c = 0; c < 20; c++) {
         var newCol = document.createElement('button');
-        newCol.setAttribute('class', 'col-3 button item-self-center border bg-light' + c);
+        newCol.setAttribute('class', 'col-3 btn spacing btn-outline-warning btn-rounded waves-effect h1');
         newCol.setAttribute('type', 'button');
         newCol.setAttribute('id', 'col' + c);
         newCol.innerHTML = `${keys[c]}`;
