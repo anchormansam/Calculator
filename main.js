@@ -14,7 +14,10 @@ title.innerHTML = 'DO YOU MATH?';
 
 function calculate() {
     // console.log(input);
+
+
     switch (this.innerHTML) {
+
         case '+':
         case '-':
         case '/':
@@ -96,11 +99,34 @@ function calculate() {
                 input = [];
                 displayCharacters(0);
             }
-            numbers(this.innerHTML);
+
+            var allowEntry = true;
+            if (input.length > 0) {
+                // we have something in the input array
+                // check the length of the first element
+                if (input[0].length >= 9) {
+                    allowEntry = false;
+                }
+            }
+
+            if (input.length > 2) {
+                // we have something in the input array
+                // check the length of the first element
+                if (input[2].length >= 9) {
+                    allowEntry = false;
+                }
+            }
+
+            // this pushes a number into input
+            if (allowEntry) {
+                numbers(this.innerHTML);
+                allowEntry = true;
+            }
 
     }
     console.log(input);
 }
+
 
 // console.log(input);
 
@@ -138,6 +164,9 @@ function createCalc() {
     } A.appendChild(calculator);
 }
 
+if (input[0] < 10 || input[2] < 10) {
+}
+
 // Display Key Characters
 function displayCharacters(displayCharacter) {
     // console.log('displayCharacter:', displayCharacter);
@@ -151,6 +180,7 @@ function numbers(n) {
     // Check string length for x digits
     // console.log(input);
     if (length > 0) {
+
         // we have a number that needs to be added
         if (parseInt(input[length - 1], 10) >= 0) {  // 0. == 0
             // console.log('length', length, 'input', input)
