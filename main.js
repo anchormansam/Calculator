@@ -21,7 +21,7 @@ function calculate() {
         case '*':
 
             equalPressed = false;
-            
+
             if (input[2]) {
                 var firstValue = parseFloat(input[0]);
                 var operator = input[1];
@@ -30,21 +30,21 @@ function calculate() {
                 if (operator) {
                     switch (operator) {
                         case '+': total = firstValue + secondValue;
-                        break;
+                            break;
                         case '-': total = firstValue - secondValue;
-                        break;
+                            break;
                         case '/': total = firstValue / secondValue;
-                        break;
+                            break;
                         case '*': total = firstValue * secondValue;
-                        break;
+                            break;
                     }
                     displayCharacters(total);
-                    
-                    
+
+
                     input = []
                     input.push(total.toString());
-                    
-                    
+
+
                 }
             }
             operators(this.innerHTML);
@@ -81,8 +81,10 @@ function calculate() {
             break;
 
         case '.':
+            console.log(input[0]);
             decimal();
             numbers(this.innerHTML);
+
             break;
         case 'C':
             input = [];
@@ -194,14 +196,28 @@ function decimal() {
     if (input.length == 0) {
         input[0] = "0.";
     }
+    else if (input.length == 1) {
+        if (input[0].includes(".")) {
+            console.log('error');
+
+        }
+        else {
+            input[0] = input[0] + '.';
+        }
+    }
     else if (input.length == 2) {
         input[2] = "0.";
     }
-    else {
-        if (input.indexOf(".") == -1) {
-            input[input.length - 1] = input[input.length - 1] + ".";
+    else if (input.length == 3) {
+        if (input[2].includes(".")) {
+            console.log('error');
+        }
+        else {
+            input[2] = input[2] + '.';
         }
     }
+
+
     return input;
 };
 
