@@ -19,14 +19,36 @@ function calculate() {
         case '-':
         case '/':
         case '*':
-            if(equalPressed){
-                input = [];
-                displayCharacters(0);
+
+            equalPressed = false;
+            
+            if (input[2]) {
+                var firstValue = parseFloat(input[0]);
+                var operator = input[1];
+                var secondValue = parseFloat(input[2]);
+                var total = 0;
+                if (operator) {
+                    switch (operator) {
+                        case '+': total = firstValue + secondValue;
+                        break;
+                        case '-': total = firstValue - secondValue;
+                        break;
+                        case '/': total = firstValue / secondValue;
+                        break;
+                        case '*': total = firstValue * secondValue;
+                        break;
+                    }
+                    displayCharacters(total);
+                    
+                    
+                    input = []
+                    input.push(total.toString());
+                    
+                    
+                }
             }
-            if  (!equalPressed){
-                // numbers(this.innerHTML);
-                operators(this.innerHTML);
-            }
+            operators(this.innerHTML);
+
             break;
         case '=':
             equalPressed = true;
@@ -46,7 +68,13 @@ function calculate() {
                         break;
                 }
                 displayCharacters(total);
-                input = [total.toString()];
+
+
+                input = []
+
+
+                input.push(total.toString());
+
                 // console.log(input);
             }
             // if a number is entered after = is hit then clear total 
@@ -67,7 +95,7 @@ function calculate() {
                 displayCharacters(0);
             }
             numbers(this.innerHTML);
-            
+
     }
     console.log(input);
 }
@@ -95,7 +123,7 @@ function createCalc() {
 
     for (c = 0; c < 20; c++) {
         var newCol = document.createElement('button');
-        newCol.setAttribute('class', 'col-3 btn spacing btn-outline-warning btn-rounded waves-effect h1');
+        newCol.setAttribute('class', 'col-3 btn spacing btn-outline-warning rounded-circle waves-effect');
         newCol.setAttribute('type', 'button');
         newCol.setAttribute('id', 'col' + c);
         newCol.innerHTML = `${keys[c]}`;
@@ -135,7 +163,7 @@ function numbers(n) {
             // we need to add an operator or a decimal
             // console.log(input);
             input.push(n);
-           
+
 
         }
     }
